@@ -7,8 +7,6 @@ from tqdm import tqdm
 from sqlalchemy import create_engine
 
 # LOAD DATA
-
-# Lê os dados
 prefix = 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/'
 
 dtype = {
@@ -60,8 +58,8 @@ def run(year, month, pg_user, pg_pass, pg_host, pg_port, pg_db, target_table, ch
     # Cria conexão com a base de dados
     engine = create_engine(f'postgresql+psycopg://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}')
 
-    # Cria uma tabela vazia usando o cabeçalho do df (o mesmo qque fazer um CREATE TABLE)
-    df.head(n=0).to_sql(name=f'yellow_taxi_trips_{year}_{month}', con=engine, if_exists='replace')
+    # Cria uma tabela vazia usando o cabeçalho do df (o mesmo que fazer um CREATE TABLE)
+    # df.head(n=0).to_sql(name=f'yellow_taxi_trips_{year}_{month}', con=engine, if_exists='replace')
 
     # Calcula o número de chunks (considerando o tamanho de 100_000 para cada)
     n_chunks = (n_rows // chunksize) + 1
